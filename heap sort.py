@@ -1,0 +1,30 @@
+def heapify(arr, n, i):
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+    
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+        
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heap_sort(arr):
+    a = arr.copy()
+    n = len(a)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(a, n, i)
+    for i in range(n - 1, 0, -1):
+        a[i], a[0] = a[0], a[i]
+        heapify(a, i, 0)
+    return a
+
+# Փորձարկում
+tver = [78, 5, 66, -8, 132]
+result = heap_sort(tver)
+
+print("Սկզբնական:", tver)
+print("Heap Sort արդյունք:", result)
